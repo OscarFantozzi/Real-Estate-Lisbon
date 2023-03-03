@@ -1,10 +1,10 @@
 from sqlalchemy import create_engine, text
 
 def create_table():
-    # Criando a banco
+    # cria o banco
     engine = create_engine('sqlite:///bd_houses_rent_api.sqlite', echo = False)
 
-    # Cria as querys para criar as tableas
+    # cria a tabela
     query_houses = text('''
 
     CREATE TABLE houses(
@@ -51,11 +51,14 @@ def create_table():
         pagina                             INTEGER,
         datetime_scrapy                    TEXT,
         newDevelopmentFinished             REAL)''')
+    
+    # cria a conexao
     conn = engine.connect()
 
-    
+    # cria a var resultado
     result = conn.execute(  query_houses ) 
     
+    # fecha a conexao com o bc
     conn.close()
 
     return result
