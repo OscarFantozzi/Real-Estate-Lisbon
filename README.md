@@ -58,8 +58,8 @@ pip install -r requirements.txt
 #### Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/YourUsername/real-estate-lisbon.git
-   cd real-estate-lisbon
+   git clone https://github.com/YourUsername/Real-Estate-Lisbon.git
+   cd Real-Estate-Lisbon
    ```
 
 2. Update the API credentials in `extracted_data.py`:
