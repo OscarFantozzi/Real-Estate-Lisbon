@@ -1,153 +1,105 @@
 
-# Real Estate Price Prediction in Lisbon
+# Real Estate Analysis in Lisbon
 
 ### 🚀 **About the Project**
 
-This project leverages the Idealista API to collect data on rental properties in Lisbon. The data is processed, cleaned, and used to train machine learning models that predict rental prices. The goal is to create a robust framework for understanding rental market trends and providing actionable insights for real estate professionals.
+This project focuses on extracting and analyzing real estate data in Lisbon using the Idealista API. The data provides insights into rental properties, which are then processed and used to train predictive models for pricing and demand estimation.
+
+The ultimate goal is to help users (e.g., real estate agencies, property owners) understand market trends and make informed decisions about property pricing and investments.
 
 ---
 
 ### ⚙️ **Features**
 
-- **Data Extraction:**
-  - Uses the Idealista API to fetch real estate data (location, size, price, etc.).
-  - Saves data in SQLite and Excel formats for flexibility.
+The dataset extracted contains the following key features:
 
-- **Data Preprocessing:**
-  - Encoding and cleaning data for machine learning compatibility.
-  - Handles missing values and outliers effectively.
+- **Property Information:**
+  - `propertyCode`: Unique identifier for each property.
+  - `price`: Rental price of the property (in euros).
+  - `size`: Size of the property in square meters.
+  - `rooms`: Number of rooms.
+  - `bathrooms`: Number of bathrooms.
+  - `propertyType`: Type of property (e.g., apartment, house).
 
-- **Machine Learning Models:**
-  - Trains models on historical data to predict rental prices.
-  - Evaluates model performance using metrics like R² and MAE.
+- **Location Information:**
+  - `latitude` and `longitude`: Geographic coordinates of the property.
+  - `address`, `district`, `municipality`: Location details.
 
-- **Practical Applications:**
-  - Assists real estate professionals in pricing properties.
-  - Provides insights into market trends and demand patterns.
+- **Additional Features:**
+  - `priceByArea`: Price per square meter.
+  - `hasLift`: Indicates if the property has an elevator.
+  - `parkingSpace`: Availability of parking spaces.
+  - `has360`: Indicates if a 360° virtual tour is available.
+  - `datetime_scrapy`: Date and time of data extraction.
 
 ---
 
 ### 🛠️ **Technologies Used**
 
 - **Programming Language:**
-  - Python (Jupyter Notebooks for exploration and documentation)
+  - Python
 
 - **Key Libraries:**
-  - `pandas`, `numpy` for data manipulation.
-  - `scikit-learn` for model training and evaluation.
-  - `sqlite3` for database management.
-  - `matplotlib`, `seaborn` for data visualization.
-  - `requests` for API calls.
-
-- **API Integration:**
-  - Idealista API for property data.
-
----
-
-### 🧩 **How to Run**
-
-#### Prerequisites
-- Python 3.8 or higher.
-- Access to the Idealista API (with valid credentials).
-- Required dependencies listed in `requirements.txt`:
-
-```bash
-pip install -r requirements.txt
-```
-
-#### Steps
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/YourUsername/Real-Estate-Lisbon.git
-   cd Real-Estate-Lisbon
-   ```
-
-2. Update the API credentials in `extracted_data.py`:
-   ```python
-   API_KEY = "your_api_key"
-   API_SECRET = "your_api_secret"
-   ```
-
-3. Run the data extraction script:
-   ```bash
-   python scripts/extracted_data.py
-   ```
-
-4. Open the Jupyter Notebook:
-   ```bash
-   jupyter lab notebooks/prices_rent_idealista-V1.ipynb
-   ```
+  - `pandas` for data manipulation.
+  - `requests` for API integration.
+  - `sqlalchemy` for database management.
+  - `scikit-learn` for machine learning models.
+  - `matplotlib` and `seaborn` for data visualization.
 
 ---
 
 ### 📄 **Workflow**
 
 1. **Data Extraction:**
-   - The `extracted_data.py` script retrieves property data from the Idealista API.
-   - Saves raw data in the `data/raw/` folder and a SQLite database.
+   - The data is extracted from the Idealista API using `requests` and authenticated via OAuth tokens.
+   - The API provides property details, which are saved in both SQLite and Excel formats for further analysis.
 
-2. **Data Cleaning:**
-   - Encodes categorical variables (e.g., property type, location).
-   - Normalizes numerical features like area and price.
+2. **Data Processing:**
+   - Features are cleaned, and missing values are handled.
+   - Numerical variables are scaled, and categorical variables are encoded.
 
-3. **Model Training:**
-   - Trains regression models (e.g., linear regression, random forest) to predict prices.
-   - Splits data into training and testing sets for evaluation.
+3. **Modeling:**
+   - Models are trained to predict rental prices (`price`) based on property attributes.
+   - Regression models like Linear Regression and Random Forest are evaluated.
 
-4. **Results and Evaluation:**
-   - Visualizes performance metrics and feature importance.
-   - Compares different models to identify the best approach.
-
----
-
-### 📊 **Example Output**
-
-Example of raw data extracted from the Idealista API:
-| Location  | Area (m²) | Bedrooms | Price (€) | Property Type |
-|-----------|-----------|----------|-----------|---------------|
-| Lisbon    | 80        | 2        | 1,200     | Apartment     |
-| Alfama    | 50        | 1        | 800       | Studio        |
-
-Model evaluation results:
-- **R² Score:** 0.87
-- **Mean Absolute Error (MAE):** €120
+4. **Evaluation:**
+   - Models are evaluated using metrics such as RMSE (Root Mean Square Error) and R².
 
 ---
 
-### 🔧 **Details About Data Extraction**
+### 📊 **Conclusions**
 
-- The script authenticates with the Idealista API using an API key and secret.
-- Retrieves property listings based on parameters such as location, property type, and operation type.
-- Stores the results in two formats:
-  - Excel files in the `data/raw/` folder.
-  - SQLite database (`database/bd_houses_rent_api.sqlite`) for structured storage.
+- **Key Insights:**
+  - Properties with parking spaces and elevators tend to have higher rental prices.
+  - Central locations (closer to Lisbon's downtown) command a premium price.
+  - Features like `priceByArea` and `rooms` are strong predictors of rental prices.
 
-#### **How to Configure API Credentials**
-- Create a `.env` file in the root directory with the following content:
-  ```env
-  IDEALISTA_API_KEY=your_api_key
-  IDEALISTA_API_SECRET=your_api_secret
-  ```
-
-- Make sure to add `.env` to your `.gitignore` to protect sensitive information:
-  ```gitignore
-  .env
-  ```
+- **Business Implications:**
+  - Property owners can use these insights to determine competitive rental prices.
+  - Real estate agencies can target specific property types for high-demand areas.
 
 ---
 
-### 🔧 **Potential Improvements**
+### 🔧 **Next Steps**
 
-- Update the dataset with fresh API calls to ensure accuracy.
-- Experiment with additional machine learning algorithms.
-- Develop an interactive dashboard for data visualization.
-- Optimize hyperparameters for better model performance.
+1. **Expand Data Collection:**
+   - Include more features such as historical price trends and proximity to public transport.
+
+2. **Improve Model Performance:**
+   - Use advanced machine learning algorithms like Gradient Boosting and XGBoost.
+   - Perform hyperparameter tuning for better model accuracy.
+
+3. **Develop a Dashboard:**
+   - Build an interactive dashboard using Power BI or Tableau to visualize market trends and predictions.
+
+4. **Real-Time Predictions:**
+   - Deploy the model via an API to provide real-time rental price predictions.
 
 ---
 
 ### 📬 **Contact**
 
-Feel free to reach out if you have any questions or suggestions:
+For questions, suggestions, or collaborations, feel free to reach out:
 
 - **GitHub:** [OscarFantozzi](https://github.com/OscarFantozzi)
 - **LinkedIn:** [Oscar Fantozzi](https://linkedin.com/in/oscarfantozzi)
