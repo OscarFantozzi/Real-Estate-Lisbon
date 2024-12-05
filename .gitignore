@@ -1,0 +1,22 @@
+# Ignorar checkpoints do Jupyter
+.ipynb_checkpoints/
+.ipynb_checkpoints
+# Ignorar arquivos temporários e específicos do sistema
+*.tmp
+*.log
+*.swp
+*.DS_Store
+
+# Ignorar dados brutos e processados
+data/raw/
+data/processed/
+
+# Ignorar banco de dados SQLite
+database/bd_houses_rent_api.sqlite
+
+# Ignorar ambiente virtual (caso exista)
+venv/
+
+# Ignorar pastas temporárias ou específicas da IDE
+.idea/
+*.vscode/
